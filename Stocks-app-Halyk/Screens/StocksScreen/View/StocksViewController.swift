@@ -25,9 +25,14 @@ final class StocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupTabBar()
+        setupNavigation()
         setupSubviews()
         tableView.dataSource = self
+        tableView.delegate = self
         getStocks()
+        
+        
         
     }
     
@@ -37,6 +42,23 @@ final class StocksViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    private func setupNavigation() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.topItem?.title = "Stocks"
+    }
+    
+    private func setupTabBar() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        self.tabBarController?.tabBar.barTintColor = .white
+        self.tabBarController?.tabBar.tintColor = .black
+        self.tabBarController?.tabBar.items?[0].image = UIImage(named: "line-chart")
+        appearance.shadowColor = .clear
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+        
     }
     
     private func getStocks() {
@@ -60,7 +82,7 @@ final class StocksViewController: UIViewController {
     }
 }
 
-extension StocksViewController: UITableViewDataSource {
+extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stocks.count
     }
@@ -75,8 +97,16 @@ extension StocksViewController: UITableViewDataSource {
             cell.cellView.backgroundColor = .white
         }
         return cell
-        
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dataPass = stocks[indexPath.row]
+        let vc1 = ChartViewController(summary: Summary(symbol: dataPass.symbol, name: dataPass.name, currentPrice: dataPass.price, changePrice: dataPass.change, changePerc: dataPass.changePercentage))
+        
+        navigationController?.pushViewController(vc1, animated: true)
+    }
+    
+    
 }
 
 struct Stock: Decodable {

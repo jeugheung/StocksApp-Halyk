@@ -87,11 +87,10 @@ final class StockCell: UITableViewCell {
     }
     
     func configure(with stock: Stock) {
-        symbolLabel.text = stock.symbol
+        symbolLabel.text = stock.symbol.uppercased()
         corporationNameLabel.text = stock.name
-        currentPriceLabel.text = "\(stock.price)"
-        changedPriceLabel.text = "\(stock.change) + \(stock.changePercentage)"
-        
+        currentPriceLabel.text = String(format: "$%.2f", stock.price)
+        changedPriceLabel.text = "\(String(format: "%.2f", stock.change))$ (\(String(format: "%.2f", stock.changePercentage))%)"
     }
     
     private func setUpViews() {
