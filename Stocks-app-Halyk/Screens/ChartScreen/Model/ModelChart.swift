@@ -8,9 +8,10 @@
 import Foundation
 
 struct Summary {
+    var id: String
     var symbol: String
     var name: String
-    var currentPrice: Double
-    var changePrice: Double
-    var changePerc: Double
+    var currentPrice: String
+    var changePrice: String
+    var changePerc: String
 }

@@ -30,7 +30,7 @@ class ChartViewController: UIViewController {
     private lazy var summaryChangedLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = String(format: "$%.2f", summary.currentPrice)
+        label.text = "\(summary.currentPrice) + \(summary.id)"
         label.font = UIFont(name: "Montserrat", size: 28)
         label.frame = CGRect(x: 0, y: 0, width: 98, height: 32)
         label.font = .boldSystemFont(ofSize: 28)
@@ -45,7 +45,7 @@ class ChartViewController: UIViewController {
     private lazy var summaryPercentageLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "\(String(format: "%.2f", summary.changePrice))$ (\(String(format: "%.2f", summary.changePerc))%)"
+        label.text = "\(summary.changePrice) \(summary.changePerc)"
         label.font = UIFont(name: "Montserrat", size: 12)
         label.frame = CGRect(x: 0, y: 0, width: 78, height: 16)
         label.font = .boldSystemFont(ofSize: 12)

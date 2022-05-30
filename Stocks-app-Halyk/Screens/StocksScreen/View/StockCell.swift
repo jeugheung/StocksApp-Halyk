@@ -86,11 +86,11 @@ final class StockCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with stock: Stock) {
-        symbolLabel.text = stock.symbol.uppercased()
-        corporationNameLabel.text = stock.name
-        currentPriceLabel.text = String(format: "$%.2f", stock.price)
-        changedPriceLabel.text = "\(String(format: "%.2f", stock.change))$ (\(String(format: "%.2f", stock.changePercentage))%)"
+    func configure(with model: StockModelProtocol) {
+        symbolLabel.text = model.symbol.uppercased()
+        corporationNameLabel.text = model.name
+        currentPriceLabel.text = model.price
+        changedPriceLabel.text = "\(model.change) \(model.changePerc)"
     }
     
     private func setUpViews() {

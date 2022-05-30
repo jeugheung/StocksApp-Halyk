@@ -15,18 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-        let StockVC = UINavigationController(rootViewController: StocksViewController())
-        
-        let tabBar = UITabBarController()
-        tabBar.setViewControllers([StockVC], animated: true)
-        
-        self.window?.rootViewController = tabBar
-        self.window?.makeKeyAndVisible()
-        
-        
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = ModuleBuilder.shared.tabbarController()
+        window.makeKeyAndVisible()
+                
+        self.window = window
+                
         return true
+        
     }
 }
+
+
+
+
+
 
