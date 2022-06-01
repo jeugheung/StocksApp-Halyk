@@ -10,6 +10,8 @@ import UIKit
 
 final class StockCell: UITableViewCell {
     
+    private var favoriteAction: (() -> Void)?
+    
     lazy var cellView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +54,9 @@ final class StockCell: UITableViewCell {
         let colorForStar = UIColor(r: 186, g: 186, b: 186)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        button.setImage(.checkmark, for: .selected)
         button.tintColor = colorForStar
+        button.addTarget(self, action: #selector(favouriteButtonTap), for: .touchUpInside)
         return button
     }()
     
@@ -86,11 +90,25 @@ final class StockCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with stock: Stock) {
-        symbolLabel.text = stock.symbol.uppercased()
-        corporationNameLabel.text = stock.name
-        currentPriceLabel.text = String(format: "$%.2f", stock.price)
-        changedPriceLabel.text = "\(String(format: "%.2f", stock.change))$ (\(String(format: "%.2f", stock.changePercentage))%)"
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        favoriteAction = nil
+    }
+    
+    func configure(with model: StockModelProtocol) {
+        symbolLabel.text = model.symbol.uppercased()
+        corporationNameLabel.text = model.name
+        currentPriceLabel.text = model.price
+        changedPriceLabel.text = "\(model.change) \(model.changePerc)"
+        starButton.isSelected = model.isFavotite
+        favoriteAction = {
+            model.setFavorite()
+        }
+    }
+    
+    @objc private func favouriteButtonTap() {
+        starButton.isSelected.toggle()
+        favoriteAction?()
     }
     
     private func setUpViews() {

@@ -9,13 +9,25 @@ import UIKit
 
 final class StocksViewController: UIViewController {
     
-    private var stocks: [Stock] = []
+    private let presenter: StocksPresenterProtocol
+    
+    init(presenter: StocksPresenterProtocol) {
+        self.presenter = presenter
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(StockCell.self, forCellReuseIdentifier: StockCell.typeName)
         return tableView
     }()
@@ -24,17 +36,17 @@ final class StocksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        setupView()
         setupTabBar()
         setupNavigation()
         setupSubviews()
-        tableView.dataSource = self
-        tableView.delegate = self
-        getStocks()
-        
-        
-        
+        presenter.loadView()
     }
+    
+    private func setupView() {
+        view.backgroundColor = .white
+    }
+    
     
     private func setupSubviews() {
         view.addSubview(tableView)
@@ -61,21 +73,7 @@ final class StocksViewController: UIViewController {
         
     }
     
-    private func getStocks() {
-        //let urlString = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=100"
-        let client = Network()
-        let service: StocksServiceProtocol = StocksService(client: client)
-        
-        service.getStocks { [weak self] result in
-            switch result {
-            case .success(let stocks):
-                self?.stocks = stocks
-                self?.tableView.reloadData()
-            case .failure(let error):
-                self?.showError(error.localizedDescription)
-            }
-        }
-    }
+    
     
     func showError(_ message: String) {
         ///
@@ -84,12 +82,12 @@ final class StocksViewController: UIViewController {
 
 extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocks.count
+        presenter.itemsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as! StockCell
-        cell.configure(with: stocks[indexPath.row])
+        cell.configure(with: presenter.model(for: indexPath))
         
         if indexPath.row.isMultiple(of: 2) {
             cell.cellView.backgroundColor = colorForOCell
@@ -100,31 +98,33 @@ extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dataPass = stocks[indexPath.row]
-        let vc1 = ChartViewController(summary: Summary(symbol: dataPass.symbol, name: dataPass.name, currentPrice: dataPass.price, changePrice: dataPass.change, changePerc: dataPass.changePercentage))
+        let service = ChartService(client: Network())
+        let stockPresenter = ChartsPresenter(with: presenter.model(for: indexPath).id, withService: service)
+        let vc = ChartViewController(with: stockPresenter)
+        vc.presenter.loadGraphData(with: presenter.model(for: indexPath).id)
+        vc.configureLabelViews(with: presenter.stoks[indexPath.row])
         
-        navigationController?.pushViewController(vc1, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension StocksViewController: StocksViewProtocol {
+    func updateView() {
+        tableView.reloadData()
+    }
+    
+    func updateView(withLoader isLoading: Bool) {
+        print("Loader is - ", isLoading, " at ", Date())
+    }
+    
+    func updateView(withError message: String) {
+        print("Error - ", message)
     }
     
     
 }
 
-struct Stock: Decodable {
-    let id: String
-    let symbol: String
-    let name: String
-    let image: String
-    let price: Double
-    let change: Double
-    let changePercentage: Double
-    
-    enum CodingKeys: String, CodingKey {
-        case id, symbol, name, image
-        case price = "current_price"
-        case change = "price_change_24h"
-        case changePercentage = "price_change_percentage_24h"
-    }
-}
+
 
 
 
