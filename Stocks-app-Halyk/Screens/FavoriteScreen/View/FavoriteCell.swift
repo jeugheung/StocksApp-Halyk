@@ -1,14 +1,13 @@
 //
-//  StockCell.swift
+//  FavoriteCell.swift
 //  Stocks-app-Halyk
 //
-//  Created by Andrey Kim on 25.05.2022.
+//  Created by Andrey Kim on 01.06.2022.
 //
 
-import Foundation
 import UIKit
 
-final class StockCell: UITableViewCell {
+final class FavoriteCell: UITableViewCell {
     
     private var favoriteAction: (() -> Void)?
     
@@ -17,7 +16,7 @@ final class StockCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         return view
     }()
     
@@ -31,7 +30,7 @@ final class StockCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var symbolLabel: UILabel = {
+    lazy var symbolLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "AAPL"
@@ -40,7 +39,7 @@ final class StockCell: UITableViewCell {
         return label
     }()
     
-    private lazy var corporationNameLabel: UILabel = {
+    lazy var corporationNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Apple Inc."
@@ -49,13 +48,12 @@ final class StockCell: UITableViewCell {
         return label
     }()
     ///////////
-    private lazy var starButton: UIButton = {
+     
+    private lazy var starButtonTwo: UIButton = {
         let button = UIButton()
-        let colorForStar = UIColor(r: 186, g: 186, b: 186)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "star.png"), for: .normal)
         button.setImage(UIImage(named: "star1.png"), for: .selected)
-        button.tintColor = colorForStar
         button.addTarget(self, action: #selector(favouriteButtonTap), for: .touchUpInside)
         return button
     }()
@@ -100,23 +98,24 @@ final class StockCell: UITableViewCell {
         corporationNameLabel.text = model.name
         currentPriceLabel.text = model.price
         changedPriceLabel.text = "\(model.change) \(model.changePerc)"
-        starButton.isSelected = model.isFavotite
+        starButtonTwo.isSelected = model.isFavotite
         favoriteAction = {
             model.setFavorite()
-            
         }
     }
+    
     @objc private func favouriteButtonTap() {
-        starButton.isSelected.toggle()
+        starButtonTwo.isSelected.toggle()
         favoriteAction?()
     }
+    
     
     private func setUpViews() {
         contentView.addSubview(cellView)
         cellView.addSubview(iconView)
         cellView.addSubview(symbolLabel)
         cellView.addSubview(corporationNameLabel)
-        cellView.addSubview(starButton)
+        cellView.addSubview(starButtonTwo)
         cellView.addSubview(currentPriceLabel)
         cellView.addSubview(changedPriceLabel)
     }
@@ -147,10 +146,10 @@ final class StockCell: UITableViewCell {
         corporationNameLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14).isActive = true
         
         // StarButton
-        starButton.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6).isActive = true
-        starButton.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 16).isActive = true
-        starButton.widthAnchor.constraint(equalToConstant: 16).isActive = true
-        starButton.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        starButtonTwo.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6).isActive = true
+        starButtonTwo.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 16).isActive = true
+        starButtonTwo.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        starButtonTwo.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
         //Current Price Label
         currentPriceLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14).isActive = true
@@ -161,5 +160,3 @@ final class StockCell: UITableViewCell {
         changedPriceLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14).isActive = true
     }
 }
-
-

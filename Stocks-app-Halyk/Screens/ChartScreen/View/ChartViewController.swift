@@ -9,6 +9,8 @@ import UIKit
 
 class ChartViewController: UIViewController {
     
+    private var favouriteAction: (() -> Void)?
+    
     var presenter: ChartPresentProtocol
     
     init(with presenter: ChartPresentProtocol) {
@@ -78,7 +80,7 @@ class ChartViewController: UIViewController {
     }()
     
     private lazy var starButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "star") , style: .plain, target: self, action: nil)
+        let button = UIBarButtonItem(image: UIImage(named: "star"), style: .plain, target: self, action: #selector(favoriteButtonTap))
         return button
         
     }()
@@ -100,11 +102,20 @@ class ChartViewController: UIViewController {
         
     }
     
+    @objc func favoriteButtonTap() {
+        starButton.isSelected.toggle()
+        favouriteAction?()
+    }
+    
     func configureLabelViews(with model: StockModelProtocol) {
         titleLabel.text = model.symbol.uppercased()
         subtitleLabel.text = model.name
         summaryChangedLabel.text = model.price
         summaryPercentageLabel.text = "\(model.change) \(model.changePerc)"
+        favouriteAction = {
+            model.setFavorite()
+            self.starButton.setBackgroundImage(UIImage(named: "star1"), for: .selected, barMetrics: .default)
+        }
     }
     
     
