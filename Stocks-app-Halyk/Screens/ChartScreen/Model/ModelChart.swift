@@ -7,11 +7,19 @@
 
 import Foundation
 
-struct Summary {
-    var id: String
-    var symbol: String
-    var name: String
-    var currentPrice: String
-    var changePrice: String
-    var changePerc: String
+protocol ChartPricesModelProtocol {
+    var prices: [[Double]] { get }
+}
+
+final class ChartPricesModel: ChartPricesModelProtocol {
+    
+    private let stockPrices: ChartPrices
+    
+    init(stockPrices: ChartPrices) {
+        self.stockPrices = stockPrices
+    }
+    
+    var prices: [[Double]] {
+        stockPrices.prices
+    }
 }

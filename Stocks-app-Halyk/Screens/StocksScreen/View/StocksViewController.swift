@@ -98,10 +98,13 @@ extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let dataPass = presenter.model(for: indexPath)
-        let vc1 = ChartViewController(summary: Summary(id: dataPass.id, symbol: dataPass.symbol, name: dataPass.name, currentPrice: dataPass.price, changePrice: dataPass.change, changePerc: dataPass.changePerc))
+        let service = ChartService(client: Network())
+        let stockPresenter = ChartsPresenter(with: presenter.model(for: indexPath).id, withService: service)
+        let vc = ChartViewController(with: stockPresenter)
+        vc.presenter.loadGraphData(with: presenter.model(for: indexPath).id)
+        vc.configureLabelViews(with: presenter.stoks[indexPath.row])
         
-        navigationController?.pushViewController(vc1, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

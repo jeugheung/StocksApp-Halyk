@@ -17,6 +17,8 @@ final class ModuleBuilder {
         Network()
     }()
     
+    let favoritesService: FavoriteServiceProtocol = FavoritesLocalService()
+    
     static let shared: ModuleBuilder = .init()
     
     func networkService() -> NetworkService {
@@ -25,6 +27,10 @@ final class ModuleBuilder {
     
     func stocksService() -> StocksServiceProtocol {
         StocksService(client: network)
+    }
+    
+    func stockServiceTwo() -> ChartServiceProtocol {
+        ChartService(client: network)
     }
     
     func stocksModule() -> UIViewController {

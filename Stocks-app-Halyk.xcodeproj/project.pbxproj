@@ -26,6 +26,11 @@
 		C946C327283DB03A0040F9B9 /* StockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C946C326283DB03A0040F9B9 /* StockCell.swift */; };
 		C946C32A283DC06F0040F9B9 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C946C329283DC06F0040F9B9 /* NSObject.swift */; };
 		C946C32C283E3A430040F9B9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C946C32B283E3A430040F9B9 /* UIColor.swift */; };
+		C9EABC6F28455D5B005FA525 /* ChartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC6E28455D5B005FA525 /* ChartPresenter.swift */; };
+		C9EABC7228455E21005FA525 /* ChartRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC7128455E21005FA525 /* ChartRouter.swift */; };
+		C9EABC7428455F09005FA525 /* ChartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC7328455F09005FA525 /* ChartService.swift */; };
+		C9EABC7628455F15005FA525 /* ChartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC7528455F15005FA525 /* ChartResponse.swift */; };
+		C9EABC7928462990005FA525 /* FavoriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC7828462990005FA525 /* FavoriteService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +55,11 @@
 		C946C326283DB03A0040F9B9 /* StockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCell.swift; sourceTree = "<group>"; };
 		C946C329283DC06F0040F9B9 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		C946C32B283E3A430040F9B9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		C9EABC6E28455D5B005FA525 /* ChartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPresenter.swift; sourceTree = "<group>"; };
+		C9EABC7128455E21005FA525 /* ChartRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRouter.swift; sourceTree = "<group>"; };
+		C9EABC7328455F09005FA525 /* ChartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartService.swift; sourceTree = "<group>"; };
+		C9EABC7528455F15005FA525 /* ChartResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartResponse.swift; sourceTree = "<group>"; };
+		C9EABC7828462990005FA525 /* FavoriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +123,7 @@
 		C93E6527284026ED0099224F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C9EABC7728462910005FA525 /* FavoriteService */,
 				C93E6528284026F60099224F /* NetworkService */,
 			);
 			path = Services;
@@ -142,6 +153,7 @@
 		C93E6534284055B00099224F /* ChartScreen */ = {
 			isa = PBXGroup;
 			children = (
+				C9EABC7028455E0A005FA525 /* Service */,
 				C93E653D28408F010099224F /* Presenter */,
 				C93E653C28408EF70099224F /* View */,
 				C93E653B28408EEA0099224F /* Model */,
@@ -168,6 +180,7 @@
 		C93E653D28408F010099224F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				C9EABC6E28455D5B005FA525 /* ChartPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -208,6 +221,24 @@
 				C946C32B283E3A430040F9B9 /* UIColor.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C9EABC7028455E0A005FA525 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C9EABC7128455E21005FA525 /* ChartRouter.swift */,
+				C9EABC7328455F09005FA525 /* ChartService.swift */,
+				C9EABC7528455F15005FA525 /* ChartResponse.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		C9EABC7728462910005FA525 /* FavoriteService */ = {
+			isa = PBXGroup;
+			children = (
+				C9EABC7828462990005FA525 /* FavoriteService.swift */,
+			);
+			path = FavoriteService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,9 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9EABC7428455F09005FA525 /* ChartService.swift in Sources */,
 				C946C317283DA5110040F9B9 /* StocksViewController.swift in Sources */,
+				C9EABC6F28455D5B005FA525 /* ChartPresenter.swift in Sources */,
+				C9EABC7928462990005FA525 /* FavoriteService.swift in Sources */,
 				C93E654528433D7D0099224F /* StockResponse.swift in Sources */,
 				C93E654328433D520099224F /* StocksRouter.swift in Sources */,
+				C9EABC7228455E21005FA525 /* ChartRouter.swift in Sources */,
 				C93E652C284029B80099224F /* NetworkError.swift in Sources */,
 				C93E654128433D070099224F /* StockModel.swift in Sources */,
 				C946C32A283DC06F0040F9B9 /* NSObject.swift in Sources */,
@@ -294,6 +329,7 @@
 				C93E65382840585F0099224F /* ModelChart.swift in Sources */,
 				C93E652E284029D00099224F /* HTTPMethod.swift in Sources */,
 				C946C327283DB03A0040F9B9 /* StockCell.swift in Sources */,
+				C9EABC7628455F15005FA525 /* ChartResponse.swift in Sources */,
 				C93E652A2840281D0099224F /* Router.swift in Sources */,
 				C946C32C283E3A430040F9B9 /* UIColor.swift in Sources */,
 				C93E6536284055CC0099224F /* ChartViewController.swift in Sources */,
