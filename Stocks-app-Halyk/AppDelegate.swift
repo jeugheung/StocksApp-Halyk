@@ -11,13 +11,20 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var navController = UINavigationController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = StocksViewController()
-        window.makeKeyAndVisible()
-        self.window = window
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        let StockVC = UINavigationController(rootViewController: StocksViewController())
+        
+        let tabBar = UITabBarController()
+        tabBar.setViewControllers([StockVC], animated: true)
+        
+        self.window?.rootViewController = tabBar
+        self.window?.makeKeyAndVisible()
+        
         
         return true
     }
