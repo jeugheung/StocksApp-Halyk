@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-import Foundation
 import UIKit
 
 final class ModuleBuilder {
@@ -42,7 +40,10 @@ final class ModuleBuilder {
     }
     
     func secondVC() -> UIViewController {
-        UIViewController()
+        let presenter = FavoritePresenter(service: stocksService())
+        let view = FavoriteViewController(presenter: presenter)
+        presenter.view = view
+        return view
     }
     
     func thirdVC() -> UIViewController {
@@ -55,8 +56,8 @@ final class ModuleBuilder {
         let stocksVC = UINavigationController(rootViewController: stocksModule())
         stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: .add, tag: 0)
         
-        let secondVC = secondVC()
-        secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: nil, tag: 2)
+        let secondVC = UINavigationController(rootViewController: secondVC())
+        secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star.png"), tag: 2)
         
         let thirdVC = thirdVC()
         thirdVC.tabBarItem = UITabBarItem(title: "Search", image: nil, tag: 2)

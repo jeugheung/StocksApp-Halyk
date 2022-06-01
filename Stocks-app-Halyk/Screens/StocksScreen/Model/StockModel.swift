@@ -70,7 +70,7 @@ final class StockModel: StockModelProtocol {
     
     func setFavorite() {
         isFavotite.toggle()
-        
+
         if isFavotite {
             favoriteService.save(id: id)
         } else {
@@ -78,5 +78,6 @@ final class StockModel: StockModelProtocol {
         }
     }
 }
+
 
 
