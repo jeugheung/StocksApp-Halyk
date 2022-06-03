@@ -34,6 +34,8 @@
 		C9EABC8128470CC4005FA525 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC8028470CC4005FA525 /* FavoriteViewController.swift */; };
 		C9EABC8328470EC2005FA525 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC8228470EC2005FA525 /* FavoriteCell.swift */; };
 		C9EABC8828477DB7005FA525 /* PresenterFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC8728477DB7005FA525 /* PresenterFavorite.swift */; };
+		C9EABC8A2849E8D8005FA525 /* FavoritesUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC892849E8D8005FA525 /* FavoritesUpdateService.swift */; };
+		C9EABC8E284A0B95005FA525 /* DetailTtile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC8D284A0B95005FA525 /* DetailTtile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		C9EABC8028470CC4005FA525 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		C9EABC8228470EC2005FA525 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		C9EABC8728477DB7005FA525 /* PresenterFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterFavorite.swift; sourceTree = "<group>"; };
+		C9EABC892849E8D8005FA525 /* FavoritesUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUpdateService.swift; sourceTree = "<group>"; };
+		C9EABC8D284A0B95005FA525 /* DetailTtile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTtile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				C93E6535284055CC0099224F /* ChartViewController.swift */,
+				C9EABC8D284A0B95005FA525 /* DetailTtile.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				C9EABC7828462990005FA525 /* FavoriteService.swift */,
+				C9EABC892849E8D8005FA525 /* FavoritesUpdateService.swift */,
 			);
 			path = FavoriteService;
 			sourceTree = "<group>";
@@ -364,8 +370,10 @@
 				C93E654128433D070099224F /* StockModel.swift in Sources */,
 				C946C32A283DC06F0040F9B9 /* NSObject.swift in Sources */,
 				C946C313283DA5110040F9B9 /* AppDelegate.swift in Sources */,
+				C9EABC8A2849E8D8005FA525 /* FavoritesUpdateService.swift in Sources */,
 				C93E653F2842C3950099224F /* StocksPresenter.swift in Sources */,
 				C93E653328402CCA0099224F /* StockService.swift in Sources */,
+				C9EABC8E284A0B95005FA525 /* DetailTtile.swift in Sources */,
 				C9EABC8828477DB7005FA525 /* PresenterFavorite.swift in Sources */,
 				C93E653028402AE10099224F /* NetworkService.swift in Sources */,
 				C93E654728433E0C0099224F /* ModuleBuilder.swift in Sources */,

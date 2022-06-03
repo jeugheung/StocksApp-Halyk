@@ -8,8 +8,8 @@
 import Foundation
 
 protocol ChartServiceProtocol {
-    func getStock(id: String, currency: String, daysCount: String, interval: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void)
-    func getStock(id: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void)
+    func getCharts(id: String, currency: String, days: String, isDaily: Bool, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void)
+    func getCharts(id: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void)
 }
 
 final class ChartService: ChartServiceProtocol {
@@ -20,14 +20,15 @@ final class ChartService: ChartServiceProtocol {
         self.client = client
     }
     
-    func getStock(id: String, currency: String, daysCount: String, interval: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void) {
-        client.execute(with: ChartRouter.stock(id: id, currency: currency, daysCount: daysCount, intervalDaily: interval), completion: completion)
+    func getCharts(id: String, currency: String, days: String, isDaily: Bool, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void) {
+        client.execute(with: ChartRouter.charts(id: id, currency: currency, days: days, isDaily: isDaily), completion: completion)
     }
 }
 
+
 extension ChartServiceProtocol {
-    func getStock(id: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void) {
-        getStock(id: id, currency: "usd", daysCount: "600", interval: "daily", completion: completion)
+    func getCharts(id: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void) {
+            getCharts(id: id, currency: "usd", days: "100", isDaily: true, completion: completion)
     }
 }
 

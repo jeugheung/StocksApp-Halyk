@@ -13,7 +13,6 @@ protocol FavoriteServiceProtocol {
     func isFavorite(for id: String) -> Bool
 }
 
-///Реализация сохранения в избранное в локальный файл.
 final class FavoritesLocalService: FavoriteServiceProtocol {
     private lazy var path: URL = {
         FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
@@ -32,16 +31,15 @@ final class FavoritesLocalService: FavoriteServiceProtocol {
         return []
     }()
     
-    
     func save(id: String) {
         favoriteIds.append(id)
-        updateRepo()
+        updateRepo(with: id)
     }
     
     func remove(id: String) {
         if let index = favoriteIds.firstIndex(where: { $0 == id }) {
             favoriteIds.remove(at: index)
-            updateRepo()
+            updateRepo(with: id)
         }
     }
     
@@ -49,10 +47,11 @@ final class FavoritesLocalService: FavoriteServiceProtocol {
         favoriteIds.contains(id)
     }
     
-    private func updateRepo() {
+    private func updateRepo(with id: String) {
         do {
             let data = try JSONEncoder().encode(favoriteIds)
             try data.write(to: path)
+            NotificationCenter.default.post(name: NSNotification.Name.favoriteNotification, object: nil, userInfo: ["id": id])
         } catch {
             print("FileManager WriteError - ", error.localizedDescription)
         }

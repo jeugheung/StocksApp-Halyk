@@ -14,40 +14,51 @@ protocol ChartViewProtocol: AnyObject {
 }
 
 protocol ChartPresentProtocol {
-    var id: String { get set }
-    var view: ChartViewProtocol? { get set }
-    func loadGraphData(with idOfStock: String)
-    init(with id: String, withService service: ChartServiceProtocol)
+
+    var titleModel: DetailTitleView.TilteModel { get }
+    var favoriteButtonIsSelected: Bool { get }
+    func loadGraphData()
+    func favoriteButtonTapped()
 }
 
 class ChartsPresenter: ChartPresentProtocol {
     
+    lazy var titleModel: DetailTitleView.TilteModel = {
+        .from(stockModel: model)
+    }()
+
+    private let model: StockModelProtocol
+    
+    private let service: ChartServiceProtocol
+    
     weak var view: ChartViewProtocol?
     
-    var service: ChartServiceProtocol
-
-    var stockPrices: ChartPricesModelProtocol?
-
-    var id: String
-
-    required init(with id: String, withService service: ChartServiceProtocol) {
-        self.id = id
+    
+    var favoriteButtonIsSelected: Bool {
+        model.isFavotite
+    }
+    
+    init(model: StockModelProtocol, service: ChartServiceProtocol) {
+        self.model = model
         self.service = service
     }
-
-
-    func loadGraphData(with idOfStock: String) {
-        id = idOfStock
-        service.getStock(id: id) { [weak self] result in
-            
+    
+    func loadGraphData() {
+        view?.updateChartView(withLoader: true)
+        
+        service.getCharts(id: model.id, currency: "usd", days: "100", isDaily: true) { [weak self] result in
+            self?.view?.updateChartView(withLoader: true)
             switch result {
-            case .success(let pricesOfStock):
-                self?.stockPrices = pricesOfStock as? ChartPricesModelProtocol
-                print(pricesOfStock)
-
+            case .success(let charts):
+                self?.view?.updateChartView()
+                print(charts.prices.count)
             case .failure(let error):
-                self?.view?.updateChartView(withError: error.localizedDescription)
+                self?.view?.updateChartView(withError: error.rawValue)
             }
         }
-   }
+    }
+    
+    func favoriteButtonTapped() {
+        model.setFavorite()
+    }
 }

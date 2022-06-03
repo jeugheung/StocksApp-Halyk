@@ -19,20 +19,16 @@ final class ModuleBuilder {
     
     static let shared: ModuleBuilder = .init()
     
-    func networkService() -> NetworkService {
-        network
-    }
     
-    func stocksService() -> StocksServiceProtocol {
+    private lazy var stocksService: StocksServiceProtocol =
         StocksService(client: network)
-    }
     
-    func stockServiceTwo() -> ChartServiceProtocol {
+    
+    private lazy var stockServiceTwo: ChartServiceProtocol =
         ChartService(client: network)
-    }
     
     func stocksModule() -> UIViewController {
-        let presneter = StocksPresenter(service: stocksService())
+        let presneter = StocksPresenter(service: stocksService)
         let view = StocksViewController(presenter: presneter)
         presneter.view = view
         
@@ -40,7 +36,7 @@ final class ModuleBuilder {
     }
     
     func secondVC() -> UIViewController {
-        let presenter = FavoritePresenter(service: stocksService())
+        let presenter = FavoritePresenter(service: stocksService)
         let view = FavoriteViewController(presenter: presenter)
         presenter.view = view
         return view
@@ -53,17 +49,23 @@ final class ModuleBuilder {
     func tabbarController() -> UIViewController {
         let tabbar = UITabBarController()
         
-        let stocksVC = UINavigationController(rootViewController: stocksModule())
-        stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: .add, tag: 0)
+        let stocksVC = stocksModule()
+        stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: UIImage(named: "line-chart.png"), tag: 0)
         
-        let secondVC = UINavigationController(rootViewController: secondVC())
-        secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star.png"), tag: 2)
+        let secondVC = secondVC()
+        secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star.png"), tag: 1)
         
         let thirdVC = thirdVC()
         thirdVC.tabBarItem = UITabBarItem(title: "Search", image: nil, tag: 2)
         
-        tabbar.viewControllers = [stocksVC, secondVC, thirdVC]
-        
+        tabbar.viewControllers = [stocksVC, secondVC, thirdVC].map { UINavigationController (rootViewController: $0)}
         return tabbar
+    }
+    
+    func detailVC(for model: StockModelProtocol) -> UIViewController {
+        let presneter = ChartsPresenter(model: model, service: stockServiceTwo)
+        let view1 = ChartViewController(with: presneter)
+        presneter.view = view1
+        return view1
     }
 }
