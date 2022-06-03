@@ -21,6 +21,7 @@ protocol StockModelProtocol {
     var isFavotite: Bool { get set }
     
     func setFavorite()
+    
 }
 
 final class StockModel: StockModelProtocol {
@@ -47,7 +48,7 @@ final class StockModel: StockModelProtocol {
     }
     
     var symbol: String {
-        stock.symbol
+        stock.symbol.uppercased()
     }
     
     var price: String {

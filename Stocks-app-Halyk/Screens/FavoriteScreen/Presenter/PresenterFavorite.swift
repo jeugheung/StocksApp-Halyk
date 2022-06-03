@@ -39,6 +39,7 @@ final class FavoritePresenter: FavoritePresenterProtocol {
     weak var view: FavoriteViewProtocol?
     
     func loadView() {
+        
         view?.updateView(withLoader: true)
 
         service.getStocks { [weak self] result in
@@ -61,3 +62,6 @@ final class FavoritePresenter: FavoritePresenterProtocol {
         stoks[indexPath.row]
     }
 }
+
+
+

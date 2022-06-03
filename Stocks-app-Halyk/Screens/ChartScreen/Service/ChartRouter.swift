@@ -9,7 +9,7 @@ import Foundation
 
 enum ChartRouter: Router {
     
-    case stock(id: String, currency: String, daysCount: String, intervalDaily: String)
+    case charts(id: String, currency: String, days: String, isDaily: Bool)
     
     var baseUrl: String {
         "https://api.coingecko.com"
@@ -17,24 +17,22 @@ enum ChartRouter: Router {
     
     var path: String {
         switch self {
-        case .stock(let id, _, _, _):
+        case .charts(let id, _, _, _):
             return "/api/v3/coins/\(id)/market_chart"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .stock:
+        case .charts:
             return .get
         }
-    
     }
     
     var parameters: Parameters {
         switch self {
-        case .stock(_, let currency, let daysCount, let intervalDaily):
-            return ["vs_currency": currency, "days": daysCount, "interval": intervalDaily]
+        case let .charts(_, currency, days, isDaily):
+            return ["vs_currency": currency, "days": days, "interval": isDaily ? "daily" : ""]
         }
     }
-    
 }

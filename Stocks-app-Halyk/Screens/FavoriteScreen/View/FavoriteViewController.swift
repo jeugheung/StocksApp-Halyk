@@ -37,10 +37,8 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupTabBar()
         setupNavigation()
         setupSubviews()
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,18 +62,6 @@ class FavoriteViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.title = "Favorites"
     }
-    
-    private func setupTabBar() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        self.tabBarController?.tabBar.barTintColor = .white
-        self.tabBarController?.tabBar.tintColor = .black
-        self.tabBarController?.tabBar.items?[0].image = UIImage(named: "star.png")
-        appearance.shadowColor = .clear
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-    }
-
 }
 
 extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
@@ -96,20 +82,20 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let service = ChartService(client: Network())
-        let chartPresenter = ChartsPresenter(with: presenter.model(for: indexPath).id, withService: service)
-        let vc = ChartViewController(with: chartPresenter)
-        vc.presenter.loadGraphData(with: presenter.model(for: indexPath).id)
-        vc.configureLabelViews(with: presenter.stoks[indexPath.row])
+        let model = presenter.model(for: indexPath)
+        let detailVC = ModuleBuilder.shared.detailVC(for: model)
         
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
 extension FavoriteViewController: FavoriteViewProtocol {
+    
+    
     func updateView() {
         tableView.reloadData()
     }
+    
     
     func updateView(withLoader isLoading: Bool) {
         print(isLoading, "true")

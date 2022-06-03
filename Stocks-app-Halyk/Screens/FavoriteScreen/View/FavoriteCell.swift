@@ -47,7 +47,6 @@ final class FavoriteCell: UITableViewCell {
         label.font = .boldSystemFont(ofSize: 11)
         return label
     }()
-    ///////////
      
     private lazy var starButtonTwo: UIButton = {
         let button = UIButton()
@@ -98,6 +97,7 @@ final class FavoriteCell: UITableViewCell {
         corporationNameLabel.text = model.name
         currentPriceLabel.text = model.price
         changedPriceLabel.text = "\(model.change) \(model.changePerc)"
+        changedPriceLabel.textColor = { model.changeColor }()
         starButtonTwo.isSelected = model.isFavotite
         favoriteAction = {
             model.setFavorite()
@@ -123,39 +123,32 @@ final class FavoriteCell: UITableViewCell {
     
     private func setUpConstrains() {
 
-        // CellView For spacing settings
         cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4).isActive = true
         cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
         cellView.heightAnchor.constraint(equalToConstant: 68).isActive = true
-        
-        // Logo
+
         iconView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 8).isActive = true
         iconView.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 8).isActive = true
         iconView.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -8).isActive = true
         iconView.heightAnchor.constraint(equalToConstant: 52).isActive = true
         iconView.widthAnchor.constraint(equalToConstant: 52).isActive = true
         
-        // SymbLabel
         symbolLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12).isActive = true
         symbolLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14).isActive = true
         
-        // CorporationName label
         corporationNameLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12).isActive = true
         corporationNameLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14).isActive = true
         
-        // StarButton
         starButtonTwo.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6).isActive = true
         starButtonTwo.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 16).isActive = true
         starButtonTwo.widthAnchor.constraint(equalToConstant: 16).isActive = true
         starButtonTwo.heightAnchor.constraint(equalToConstant: 16).isActive = true
         
-        //Current Price Label
         currentPriceLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14).isActive = true
         currentPriceLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -17).isActive = true
         
-        //ChagedPrice Label
         changedPriceLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -12).isActive = true
         changedPriceLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14).isActive = true
     }

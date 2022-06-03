@@ -37,14 +37,10 @@ final class StocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupTabBar()
+        //setupTabBar()
         setupNavigation()
         setupSubviews()
         presenter.loadView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
     }
     
     private func setupView() {
@@ -64,22 +60,7 @@ final class StocksViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.title = "Stocks"
     }
-    
-    private func setupTabBar() {
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        self.tabBarController?.tabBar.barTintColor = .white
-        self.tabBarController?.tabBar.tintColor = .black
-        self.tabBarController?.tabBar.items?[0].image = UIImage(named: "line-chart.png")
-        appearance.shadowColor = .clear
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-        
-    }
-    
-    func showError(_ message: String) {
-        ///
-    }
+
 }
 
 extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
@@ -102,20 +83,21 @@ extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let service = ChartService(client: Network())
-        let stockPresenter = ChartsPresenter(with: presenter.model(for: indexPath).id, withService: service)
-        let vc = ChartViewController(with: stockPresenter)
-        vc.presenter.loadGraphData(with: presenter.model(for: indexPath).id)
-        vc.configureLabelViews(with: presenter.stoks[indexPath.row])
+        let model = presenter.model(for: indexPath)
+        let detailVC = ModuleBuilder.shared.detailVC(for: model)
         
-        navigationController?.pushViewController(vc, animated: true)
-        
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
 extension StocksViewController: StocksViewProtocol {
+    
     func updateView() {
         tableView.reloadData()
+    }
+    
+    func updateCell(for indexPath: IndexPath) {
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     func updateView(withLoader isLoading: Bool) {
@@ -125,8 +107,6 @@ extension StocksViewController: StocksViewProtocol {
     func updateView(withError message: String) {
         print("Error - ", message)
     }
-    
-    
 }
 
 
