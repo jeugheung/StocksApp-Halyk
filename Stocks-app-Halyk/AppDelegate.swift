@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = ModuleBuilder.shared.tabbarController()
         window?.makeKeyAndVisible()
-                
         return true
         
     }

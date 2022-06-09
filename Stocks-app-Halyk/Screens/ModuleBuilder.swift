@@ -63,9 +63,10 @@ final class ModuleBuilder {
     }
     
     func detailVC(for model: StockModelProtocol) -> UIViewController {
-        let presneter = ChartsPresenter(model: model, service: stockServiceTwo)
-        let view1 = ChartViewController(with: presneter)
-        presneter.view = view1
-        return view1
+        let presneter = ChartsPresenter(model: model, service: stockServiceTwo, chartModel: ChartModel(dictiOFPeriod: [:]))
+        let view = ChartViewController(with: presneter)
+        presneter.view = view
+        return view
     }
+    
 }

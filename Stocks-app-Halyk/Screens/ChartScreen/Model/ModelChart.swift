@@ -7,19 +7,16 @@
 
 import Foundation
 
-protocol ChartPricesModelProtocol {
-    var prices: [[Double]] { get }
-}
-
-final class ChartPricesModel: ChartPricesModelProtocol {
+struct ChartModel {
     
-    private let stockPrices: ChartPrices
+    var dictiOFPeriod: [String: [Double]]
     
-    init(stockPrices: ChartPrices) {
-        self.stockPrices = stockPrices
-    }
-    
-    var prices: [[Double]] {
-        stockPrices.prices
+    func allPrices(from response: ChartPrices) -> ChartModel {
+        let weeklyPrices = Array(response.prices.map { $0.price }.suffix(7))
+        let monthly = Array(response.prices.map { $0.price }.suffix(31))
+        let sixMonthly = Array(response.prices.map { $0.price }.suffix(186))
+        let year = Array(response.prices.map { $0.price }.suffix(365))
+        return ChartModel(dictiOFPeriod: ["weekly": weeklyPrices, "monthly": monthly,
+                                          "sixMonthly": sixMonthly, "year": year])
     }
 }

@@ -36,6 +36,8 @@
 		C9EABC8828477DB7005FA525 /* PresenterFavorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC8728477DB7005FA525 /* PresenterFavorite.swift */; };
 		C9EABC8A2849E8D8005FA525 /* FavoritesUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC892849E8D8005FA525 /* FavoritesUpdateService.swift */; };
 		C9EABC8E284A0B95005FA525 /* DetailTtile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABC8D284A0B95005FA525 /* DetailTtile.swift */; };
+		C9EABC9F284C9723005FA525 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = C9EABC9E284C9723005FA525 /* Charts */; };
+		C9EABCA1284C9FFD005FA525 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EABCA0284C9FFC005FA525 /* ChartsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +72,7 @@
 		C9EABC8728477DB7005FA525 /* PresenterFavorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterFavorite.swift; sourceTree = "<group>"; };
 		C9EABC892849E8D8005FA525 /* FavoritesUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUpdateService.swift; sourceTree = "<group>"; };
 		C9EABC8D284A0B95005FA525 /* DetailTtile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTtile.swift; sourceTree = "<group>"; };
+		C9EABCA0284C9FFC005FA525 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9EABC9F284C9723005FA525 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +189,7 @@
 			children = (
 				C93E6535284055CC0099224F /* ChartViewController.swift */,
 				C9EABC8D284A0B95005FA525 /* DetailTtile.swift */,
+				C9EABCA0284C9FFC005FA525 /* ChartsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +309,9 @@
 			dependencies = (
 			);
 			name = "Stocks-app-Halyk";
+			packageProductDependencies = (
+				C9EABC9E284C9723005FA525 /* Charts */,
+			);
 			productName = "Stocks-app-Halyk";
 			productReference = C946C30F283DA5110040F9B9 /* Stocks-app-Halyk.app */;
 			productType = "com.apple.product-type.application";
@@ -332,6 +340,9 @@
 				Base,
 			);
 			mainGroup = C946C306283DA5110040F9B9;
+			packageReferences = (
+				C9EABC9D284C9723005FA525 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = C946C310283DA5110040F9B9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -365,6 +376,7 @@
 				C9EABC7928462990005FA525 /* FavoriteService.swift in Sources */,
 				C93E654528433D7D0099224F /* StockResponse.swift in Sources */,
 				C93E654328433D520099224F /* StocksRouter.swift in Sources */,
+				C9EABCA1284C9FFD005FA525 /* ChartsView.swift in Sources */,
 				C9EABC7228455E21005FA525 /* ChartRouter.swift in Sources */,
 				C93E652C284029B80099224F /* NetworkError.swift in Sources */,
 				C93E654128433D070099224F /* StockModel.swift in Sources */,
@@ -592,6 +604,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C9EABC9D284C9723005FA525 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C9EABC9E284C9723005FA525 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9EABC9D284C9723005FA525 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C946C307283DA5110040F9B9 /* Project object */;
 }

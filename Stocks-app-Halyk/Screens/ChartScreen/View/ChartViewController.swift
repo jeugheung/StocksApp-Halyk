@@ -9,12 +9,6 @@ import UIKit
 
 class ChartViewController: UIViewController {
     
-    private lazy var titleView: UIView = {
-        let view = DetailTitleView()
-        view.configure(with: presenter.titleModel)
-        return view
-    }()
-    
     var presenter: ChartPresentProtocol
     
     init(with presenter: ChartPresentProtocol) {
@@ -26,6 +20,30 @@ class ChartViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    private lazy var titleView: UIView = {
+        let view = DetailTitleView()
+        view.configure(with: presenter.titleModel)
+        return view
+    }()
+    
+    private lazy var chartsContainerView: ChartsContainerView = {
+        let view = ChartsContainerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var buyButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 16
+        button.setTitle("Buy for \(presenter.titleModel.price)", for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 328, height: 56)
+        button.addTarget(self, action: #selector(buyTap), for: .touchUpInside)
+        return button
+    }()
     
     private lazy var summaryChangedLabel: UILabel = {
         let label = UILabel()
@@ -56,12 +74,15 @@ class ChartViewController: UIViewController {
         return label
     }()
     
-    private lazy var canvasGraph: UIView = {
-        let canvasGraph = UIView()
-        canvasGraph.translatesAutoresizingMaskIntoConstraints = false
-        canvasGraph.backgroundColor = .systemGray
-        return canvasGraph
-    }()
+    override var hidesBottomBarWhenPushed: Bool {
+        get { true }
+        set { super.hidesBottomBarWhenPushed = newValue }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +93,7 @@ class ChartViewController: UIViewController {
         presenter.loadGraphData()
         setupFavoriteButton()
     }
+    
     
     private func setupFavoriteButton() {
         let button = UIButton()
@@ -88,10 +110,18 @@ class ChartViewController: UIViewController {
         presenter.favoriteButtonTapped()
     }
     
+    @objc private func buyTap(sender: UIButton) {
+        let alert = UIAlertController(title: "Successful purchase", message: "You bought \(presenter.titleModel.name)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
     private func setupViews() {
         view.addSubview(summaryChangedLabel)
         view.addSubview(summaryPercentageLabel)
-        view.addSubview(canvasGraph)
+        view.addSubview(chartsContainerView)
+        view.addSubview(buyButton)
+        
     }
     
     private func navigationSetup() {
@@ -117,24 +147,33 @@ class ChartViewController: UIViewController {
         summaryPercentageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
         summaryPercentageLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 202).isActive = true
 
-        /// canvas
-        canvasGraph.topAnchor.constraint(equalTo: view.topAnchor, constant: 248).isActive = true
-        canvasGraph.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        canvasGraph.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        canvasGraph.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -212).isActive = true
+        chartsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        chartsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        chartsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 110).isActive = true
+        
+        buyButton.widthAnchor.constraint(equalToConstant: 328).isActive = true
+        buyButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        buyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        buyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130).isActive = true
+        
     }
+    
 }
 
 extension ChartViewController: ChartViewProtocol {
-    func updateChartView() {
-        
+    func updateChartView(with chartModel: ChartModel) {
+        chartsContainerView.configureChart(with: chartModel)
     }
-    
+
     func updateChartView(withLoader isLoading: Bool) {
-        
+        chartsContainerView.configure(with: isLoading)
     }
-    
+
     func updateChartView(withError message: String) {
-        
+
     }
 }
+
+
+
