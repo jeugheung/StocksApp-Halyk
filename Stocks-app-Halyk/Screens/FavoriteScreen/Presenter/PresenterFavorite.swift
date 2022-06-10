@@ -24,7 +24,6 @@ protocol FavoritePresenterProtocol {
 }
 
 final class FavoritePresenter: FavoritePresenterProtocol {
-    
     private let service: StocksServiceProtocol
     var stoks: [StockModelProtocol] = []
     
@@ -39,15 +38,13 @@ final class FavoritePresenter: FavoritePresenterProtocol {
     weak var view: FavoriteViewProtocol?
     
     func loadView() {
-        
         view?.updateView(withLoader: true)
 
         service.getStocks { [weak self] result in
             self?.view?.updateView(withLoader: false)
-            
             switch result {
             case .success(let stocks):
-                let firstVcStocks = stocks.map { StockModel(stock: $0) }
+                let firstVcStocks = stocks
                 self?.stoks = firstVcStocks.filter({ stock in
                     stock.isFavotite == true
                 })
@@ -62,6 +59,3 @@ final class FavoritePresenter: FavoritePresenterProtocol {
         stoks[indexPath.row]
     }
 }
-
-
-

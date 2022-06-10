@@ -24,10 +24,7 @@ struct ChartPrices: Decodable {
             self.price = price
             self.date = date
         }
-        
     }
-
-    
 }
 
 extension Array {
@@ -35,7 +32,6 @@ extension Array {
         guard index >= 0, index < endIndex else {
             return nil
         }
-
         return self[index]
     }
 }

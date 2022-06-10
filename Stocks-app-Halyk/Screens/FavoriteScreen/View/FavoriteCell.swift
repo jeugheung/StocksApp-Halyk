@@ -34,8 +34,7 @@ final class FavoriteCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "AAPL"
-        label.font = UIFont(name: "Montserrat", size: 18)
-        label.font = .boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "Montserrat-Bold", size: 18)
         return label
     }()
     
@@ -43,8 +42,7 @@ final class FavoriteCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Apple Inc."
-        label.font = UIFont(name: "Montserrat", size: 11)
-        label.font = .boldSystemFont(ofSize: 11)
+        label.font = UIFont(name: "Montserrat-SemiBold", size: 11)
         return label
     }()
      
@@ -61,8 +59,7 @@ final class FavoriteCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "$131.93"
-        label.font = UIFont(name: "Montserrat", size: 18)
-        label.font = .boldSystemFont(ofSize: 18)
+        label.font = UIFont(name: "Montserrat-Bold", size: 18)
         return label
     }()
     
@@ -70,8 +67,7 @@ final class FavoriteCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "+$0,12 (1,15%)"
-        label.font = UIFont(name: "Montserrat", size: 12)
-        label.font = .boldSystemFont(ofSize: 12)
+        label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
         let color = UIColor(r: 36, g: 178, b: 93)
         label.textColor = color
         return label
@@ -97,7 +93,7 @@ final class FavoriteCell: UITableViewCell {
         corporationNameLabel.text = model.name
         currentPriceLabel.text = model.price
         changedPriceLabel.text = "\(model.change) \(model.changePerc)"
-        changedPriceLabel.textColor = { model.changeColor }()
+        changedPriceLabel.textColor = model.changeColor
         starButtonTwo.isSelected = model.isFavotite
         favoriteAction = {
             model.setFavorite()
@@ -109,47 +105,43 @@ final class FavoriteCell: UITableViewCell {
         favoriteAction?()
     }
     
-    
     private func setUpViews() {
         contentView.addSubview(cellView)
-        cellView.addSubview(iconView)
-        cellView.addSubview(symbolLabel)
-        cellView.addSubview(corporationNameLabel)
-        cellView.addSubview(starButtonTwo)
-        cellView.addSubview(currentPriceLabel)
-        cellView.addSubview(changedPriceLabel)
+        [iconView, symbolLabel, corporationNameLabel, starButtonTwo, currentPriceLabel, changedPriceLabel].forEach{
+            cellView.addSubview($0)
+        }
     }
     
-    
     private func setUpConstrains() {
-
-        cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4).isActive = true
-        cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4).isActive = true
-        cellView.heightAnchor.constraint(equalToConstant: 68).isActive = true
-
-        iconView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 8).isActive = true
-        iconView.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 8).isActive = true
-        iconView.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -8).isActive = true
-        iconView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-        iconView.widthAnchor.constraint(equalToConstant: 52).isActive = true
-        
-        symbolLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12).isActive = true
-        symbolLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14).isActive = true
-        
-        corporationNameLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12).isActive = true
-        corporationNameLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14).isActive = true
-        
-        starButtonTwo.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6).isActive = true
-        starButtonTwo.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 16).isActive = true
-        starButtonTwo.widthAnchor.constraint(equalToConstant: 16).isActive = true
-        starButtonTwo.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        
-        currentPriceLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14).isActive = true
-        currentPriceLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -17).isActive = true
-        
-        changedPriceLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -12).isActive = true
-        changedPriceLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14).isActive = true
+        NSLayoutConstraint.activate([
+            cellView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cellView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            cellView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            cellView.heightAnchor.constraint(equalToConstant: 68),
+            
+            iconView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 8),
+            iconView.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 8),
+            iconView.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -8),
+            iconView.heightAnchor.constraint(equalToConstant: 52),
+            iconView.widthAnchor.constraint(equalToConstant: 52),
+            
+            symbolLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12),
+            symbolLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14),
+            
+            corporationNameLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: 12),
+            corporationNameLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14),
+            
+            starButtonTwo.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6),
+            starButtonTwo.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 16),
+            starButtonTwo.widthAnchor.constraint(equalToConstant: 16),
+            starButtonTwo.heightAnchor.constraint(equalToConstant: 16),
+            
+            currentPriceLabel.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14),
+            currentPriceLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -17),
+            
+            changedPriceLabel.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -12),
+            changedPriceLabel.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -14)
+        ])
     }
 }

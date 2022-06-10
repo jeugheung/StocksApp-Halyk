@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChartViewController: UIViewController {
+final class ChartViewController: UIViewController {
     
     var presenter: ChartPresentProtocol
     
@@ -20,7 +20,6 @@ class ChartViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     private lazy var titleView: UIView = {
         let view = DetailTitleView()
@@ -49,9 +48,8 @@ class ChartViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = presenter.titleModel.price
-        label.font = UIFont(name: "Montserrat", size: 28)
+        label.font = UIFont(name: "Montserrat-Bold", size: 28)
         label.frame = CGRect(x: 0, y: 0, width: 98, height: 32)
-        label.font = .boldSystemFont(ofSize: 28)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.01
@@ -65,9 +63,8 @@ class ChartViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "\(presenter.titleModel.change) \(presenter.titleModel.changePerc)"
         label.textColor = presenter.titleModel.color
-        label.font = UIFont(name: "Montserrat", size: 12)
+        label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
         label.frame = CGRect(x: 0, y: 0, width: 78, height: 16)
-        label.font = .boldSystemFont(ofSize: 12)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.01
@@ -81,7 +78,6 @@ class ChartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
     }
     
     override func viewDidLoad() {
@@ -93,7 +89,6 @@ class ChartViewController: UIViewController {
         presenter.loadGraphData()
         setupFavoriteButton()
     }
-    
     
     private func setupFavoriteButton() {
         let button = UIButton()
@@ -121,44 +116,37 @@ class ChartViewController: UIViewController {
         view.addSubview(summaryPercentageLabel)
         view.addSubview(chartsContainerView)
         view.addSubview(buyButton)
-        
     }
     
     private func navigationSetup() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.tintColor = .black
-        appearance.shadowColor = .clear
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
         navigationItem.titleView = titleView
     }
     
     private func setUpConstrains() {
+        NSLayoutConstraint.activate([
+            summaryChangedLabel.widthAnchor.constraint(equalToConstant: 98),
+            summaryChangedLabel.heightAnchor.constraint(equalToConstant: 32),
+            summaryChangedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 2),
+            summaryChangedLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 162),
 
-        summaryChangedLabel.widthAnchor.constraint(equalToConstant: 98).isActive = true
-        summaryChangedLabel.heightAnchor.constraint(equalToConstant: 32).isActive = true
-        summaryChangedLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 2).isActive = true
-        summaryChangedLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 162).isActive = true
+            summaryPercentageLabel.widthAnchor.constraint(equalToConstant: 78),
+            summaryPercentageLabel.heightAnchor.constraint(equalToConstant: 16),
+            summaryPercentageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            summaryPercentageLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 202),
 
-        summaryPercentageLabel.widthAnchor.constraint(equalToConstant: 78).isActive = true
-        summaryPercentageLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-        summaryPercentageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        summaryPercentageLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 202).isActive = true
-
-        chartsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        chartsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        chartsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 110).isActive = true
-        
-        buyButton.widthAnchor.constraint(equalToConstant: 328).isActive = true
-        buyButton.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        buyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        buyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130).isActive = true
-        
+            chartsContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            chartsContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            chartsContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 110),
+            
+            buyButton.widthAnchor.constraint(equalToConstant: 328),
+            buyButton.heightAnchor.constraint(equalToConstant: 56),
+            buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            buyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            buyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -130)
+        ])
     }
-    
 }
 
 extension ChartViewController: ChartViewProtocol {
@@ -174,6 +162,3 @@ extension ChartViewController: ChartViewProtocol {
 
     }
 }
-
-
-

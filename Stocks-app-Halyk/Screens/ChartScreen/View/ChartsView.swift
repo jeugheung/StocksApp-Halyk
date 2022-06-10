@@ -93,34 +93,36 @@ final class ChartsContainerView: UIView {
         addSubview(buttonStackView)
         chartsView[0].addSubview(loader)
         
-        chartsView[0].leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        chartsView[0].trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chartsView[0].topAnchor.constraint(equalTo: topAnchor).isActive = true
-        chartsView[0].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36).isActive = true
-        
-        chartsView[1].leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        chartsView[1].trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chartsView[1].topAnchor.constraint(equalTo: topAnchor).isActive = true
-        chartsView[1].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36).isActive = true
-        
-        chartsView[2].leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        chartsView[2].trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chartsView[2].topAnchor.constraint(equalTo: topAnchor).isActive = true
-        chartsView[2].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36).isActive = true
-        
-        chartsView[3].leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        chartsView[3].trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        chartsView[3].topAnchor.constraint(equalTo: topAnchor).isActive = true
-        chartsView[3].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36).isActive = true
-        
-        buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
-        buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
-        buttonStackView.topAnchor.constraint(equalTo: chartsView[0].bottomAnchor, constant: 40).isActive = true
-        buttonStackView.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-        loader.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        loader.centerYAnchor.constraint(equalTo: chartsView[0].centerYAnchor, constant: -20).isActive = true
+        NSLayoutConstraint.activate([
+            chartsView[0].leadingAnchor.constraint(equalTo: leadingAnchor),
+            chartsView[0].trailingAnchor.constraint(equalTo: trailingAnchor),
+            chartsView[0].topAnchor.constraint(equalTo: topAnchor),
+            chartsView[0].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36),
+            
+            chartsView[1].leadingAnchor.constraint(equalTo: leadingAnchor),
+            chartsView[1].trailingAnchor.constraint(equalTo: trailingAnchor),
+            chartsView[1].topAnchor.constraint(equalTo: topAnchor),
+            chartsView[1].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36),
+            
+            chartsView[2].leadingAnchor.constraint(equalTo: leadingAnchor),
+            chartsView[2].trailingAnchor.constraint(equalTo: trailingAnchor),
+            chartsView[2].topAnchor.constraint(equalTo: topAnchor),
+            chartsView[2].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36),
+            
+            chartsView[3].leadingAnchor.constraint(equalTo: leadingAnchor),
+            chartsView[3].trailingAnchor.constraint(equalTo: trailingAnchor),
+            chartsView[3].topAnchor.constraint(equalTo: topAnchor),
+            chartsView[3].heightAnchor.constraint(equalTo: chartsView[0].widthAnchor, multiplier: 26/36),
+            
+            buttonStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            buttonStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            buttonStackView.topAnchor.constraint(equalTo: chartsView[0].bottomAnchor, constant: 40),
+            buttonStackView.heightAnchor.constraint(equalToConstant: 44),
+            buttonStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            loader.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: chartsView[0].centerYAnchor, constant: -20)
+        ])
         
         addButtons(for: ["W", "M", "6M", "Y"])
     }
@@ -149,7 +151,6 @@ final class ChartsContainerView: UIView {
     }
     
     @objc private func periodButtonTapped(sender: UIButton) {
-        
         buttonStackView.subviews.compactMap { $0 as? UIButton }.forEach { button in
             button.backgroundColor = UIColor(red: 240/255, green: 244/255, blue: 247/255, alpha: 1)
             button.setTitleColor(.black, for: .normal)
@@ -185,7 +186,6 @@ final class ChartsContainerView: UIView {
         sender.backgroundColor = .black
         sender.setTitleColor(.white, for: .normal)
     }
-    
     
     private func setCharts(with prices: [Double]?, canvas: LineChartView) {
         guard let prices = prices else {
@@ -224,4 +224,3 @@ extension ChartsContainerView: ChartViewProtocol {
         
     }
 }
-

@@ -14,7 +14,6 @@ protocol ChartViewProtocol: AnyObject {
 }
 
 protocol ChartPresentProtocol {
-
     var titleModel: DetailTitleView.TilteModel { get }
     var favoriteButtonIsSelected: Bool { get }
     func loadGraphData()
@@ -22,7 +21,6 @@ protocol ChartPresentProtocol {
 }
 
 class ChartsPresenter: ChartPresentProtocol {
-    
     lazy var titleModel: DetailTitleView.TilteModel = {
         .from(stockModel: model)
     }()
@@ -48,7 +46,6 @@ class ChartsPresenter: ChartPresentProtocol {
     
     func loadGraphData() {
         view?.updateChartView(withLoader: true)
-        
         service.getCharts(id: model.id, currency: "usd", days: "367", isDaily: true) { [weak self] result in
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self?.view?.updateChartView(withLoader: false)

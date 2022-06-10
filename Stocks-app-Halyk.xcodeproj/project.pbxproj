@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C92ED0172852BB7200BA5353 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C92ED0162852BB7200BA5353 /* Montserrat-Regular.ttf */; };
+		C92ED0192852BB8900BA5353 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C92ED0182852BB8900BA5353 /* Montserrat-Bold.ttf */; };
+		C92ED01B2852BD6B00BA5353 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C92ED01A2852BD6A00BA5353 /* Montserrat-SemiBold.ttf */; };
 		C93E652A2840281D0099224F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E65292840281D0099224F /* Router.swift */; };
 		C93E652C284029B80099224F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E652B284029B80099224F /* NetworkError.swift */; };
 		C93E652E284029D00099224F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E652D284029D00099224F /* HTTPMethod.swift */; };
@@ -18,7 +21,7 @@
 		C93E654128433D070099224F /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E654028433D070099224F /* StockModel.swift */; };
 		C93E654328433D520099224F /* StocksRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E654228433D520099224F /* StocksRouter.swift */; };
 		C93E654528433D7D0099224F /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E654428433D7D0099224F /* StockResponse.swift */; };
-		C93E654728433E0C0099224F /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E654628433E0C0099224F /* ModuleBuilder.swift */; };
+		C93E654728433E0C0099224F /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93E654628433E0C0099224F /* Assembly.swift */; };
 		C946C313283DA5110040F9B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C946C312283DA5110040F9B9 /* AppDelegate.swift */; };
 		C946C317283DA5110040F9B9 /* StocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C946C316283DA5110040F9B9 /* StocksViewController.swift */; };
 		C946C31C283DA5140040F9B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C946C31B283DA5140040F9B9 /* Assets.xcassets */; };
@@ -41,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C92ED0162852BB7200BA5353 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		C92ED0182852BB8900BA5353 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		C92ED01A2852BD6A00BA5353 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		C93E65292840281D0099224F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C93E652B284029B80099224F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		C93E652D284029D00099224F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -52,7 +58,7 @@
 		C93E654028433D070099224F /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
 		C93E654228433D520099224F /* StocksRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksRouter.swift; sourceTree = "<group>"; };
 		C93E654428433D7D0099224F /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
-		C93E654628433E0C0099224F /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		C93E654628433E0C0099224F /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 		C946C30F283DA5110040F9B9 /* Stocks-app-Halyk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stocks-app-Halyk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C946C312283DA5110040F9B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C946C316283DA5110040F9B9 /* StocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +93,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C92ED0152852BB1800BA5353 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C92ED01A2852BD6A00BA5353 /* Montserrat-SemiBold.ttf */,
+				C92ED0182852BB8900BA5353 /* Montserrat-Bold.ttf */,
+				C92ED0162852BB7200BA5353 /* Montserrat-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		C93E6522284026820099224F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
@@ -94,7 +110,7 @@
 				C93E6534284055B00099224F /* ChartScreen */,
 				C93E6527284026ED0099224F /* Services */,
 				C93E65232840268F0099224F /* StocksScreen */,
-				C93E654628433E0C0099224F /* ModuleBuilder.swift */,
+				C93E654628433E0C0099224F /* Assembly.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -221,6 +237,7 @@
 		C946C311283DA5110040F9B9 /* Stocks-app-Halyk */ = {
 			isa = PBXGroup;
 			children = (
+				C92ED0152852BB1800BA5353 /* Fonts */,
 				C93E6522284026820099224F /* Screens */,
 				C946C312283DA5110040F9B9 /* AppDelegate.swift */,
 				C946C31D283DA5140040F9B9 /* LaunchScreen.storyboard */,
@@ -357,8 +374,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C92ED0192852BB8900BA5353 /* Montserrat-Bold.ttf in Resources */,
+				C92ED0172852BB7200BA5353 /* Montserrat-Regular.ttf in Resources */,
 				C946C31F283DA5140040F9B9 /* LaunchScreen.storyboard in Resources */,
 				C946C31C283DA5140040F9B9 /* Assets.xcassets in Resources */,
+				C92ED01B2852BD6B00BA5353 /* Montserrat-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +408,7 @@
 				C9EABC8E284A0B95005FA525 /* DetailTtile.swift in Sources */,
 				C9EABC8828477DB7005FA525 /* PresenterFavorite.swift in Sources */,
 				C93E653028402AE10099224F /* NetworkService.swift in Sources */,
-				C93E654728433E0C0099224F /* ModuleBuilder.swift in Sources */,
+				C93E654728433E0C0099224F /* Assembly.swift in Sources */,
 				C93E65382840585F0099224F /* ModelChart.swift in Sources */,
 				C93E652E284029D00099224F /* HTTPMethod.swift in Sources */,
 				C946C327283DB03A0040F9B9 /* StockCell.swift in Sources */,

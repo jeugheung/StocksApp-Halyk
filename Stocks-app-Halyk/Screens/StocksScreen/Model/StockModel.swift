@@ -17,11 +17,8 @@ protocol StockModelProtocol {
     var change: String { get }
     var changePerc: String { get }
     var changeColor: UIColor { get }
-    
     var isFavotite: Bool { get set }
-    
     func setFavorite()
-    
 }
 
 final class StockModel: StockModelProtocol {
@@ -31,7 +28,7 @@ final class StockModel: StockModelProtocol {
 
     init(stock: Stock) {
         self.stock = stock
-        favoriteService = ModuleBuilder.shared.favoritesService
+        favoriteService = Assembly.assembler.favoritesService
         isFavotite = favoriteService.isFavorite(for: id)
     }
     
@@ -64,7 +61,7 @@ final class StockModel: StockModelProtocol {
     }
     
     var changeColor: UIColor {
-        stock.change >= 0 ? .green : .red
+        { stock.change >= 0 ? .green : .red }()
     }
     
     var isFavotite: Bool = false
@@ -79,6 +76,3 @@ final class StockModel: StockModelProtocol {
         }
     }
 }
-
-
-

@@ -1,5 +1,5 @@
 //
-//  ModuleBuilder.swift
+//  Assembly.swift
 //  Stocks-app-Halyk
 //
 //  Created by Andrey Kim on 29.05.2022.
@@ -8,22 +8,14 @@
 import Foundation
 import UIKit
 
-final class ModuleBuilder {
+final class Assembly {
     private init() {}
     
-    private lazy var network: NetworkService = {
-        Network()
-    }()
-    
+    static let assembler: Assembly = .init()
     let favoritesService: FavoriteServiceProtocol = FavoritesLocalService()
     
-    static let shared: ModuleBuilder = .init()
-    
-    
-    private lazy var stocksService: StocksServiceProtocol =
-        StocksService(client: network)
-    
-    
+    private lazy var network: NetworkService = Network()
+    private lazy var stocksService: StocksServiceProtocol = StocksService(network: network)
     private lazy var stockServiceTwo: ChartServiceProtocol =
         ChartService(client: network)
     
@@ -42,20 +34,21 @@ final class ModuleBuilder {
         return view
     }
     
-    func thirdVC() -> UIViewController {
-        UIViewController()
+    func searchVC() -> UIViewController {
+        return UIViewController()
     }
+    
     
     func tabbarController() -> UIViewController {
         let tabbar = UITabBarController()
         
         let stocksVC = stocksModule()
-        stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: UIImage(named: "line-chart.png"), tag: 0)
+        stocksVC.tabBarItem = UITabBarItem(title: "Stocks", image: UIImage(systemName: "chart.line.uptrend.xyaxis"), tag: 0)
         
         let secondVC = secondVC()
-        secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star.png"), tag: 1)
+        secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star3.pdf"), tag: 1)
         
-        let thirdVC = thirdVC()
+        let thirdVC = searchVC()
         thirdVC.tabBarItem = UITabBarItem(title: "Search", image: nil, tag: 2)
         
         tabbar.viewControllers = [stocksVC, secondVC, thirdVC].map { UINavigationController (rootViewController: $0)}
@@ -68,5 +61,4 @@ final class ModuleBuilder {
         presneter.view = view
         return view
     }
-    
 }

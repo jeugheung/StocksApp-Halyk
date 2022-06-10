@@ -8,7 +8,6 @@
 import Foundation
 
 enum ChartRouter: Router {
-    
     case charts(id: String, currency: String, days: String, isDaily: Bool)
     
     var baseUrl: String {

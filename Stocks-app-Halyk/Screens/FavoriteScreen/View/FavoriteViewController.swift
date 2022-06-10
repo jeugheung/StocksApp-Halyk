@@ -52,10 +52,13 @@ class FavoriteViewController: UIViewController {
     
     private func setupSubviews() {
         view.addSubview(tableView)
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     private func setupNavigation() {
@@ -70,7 +73,9 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.typeName, for: indexPath) as! FavoriteCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteCell.typeName, for: indexPath) as? FavoriteCell else {
+            return UITableViewCell()
+        }
         cell.selectionStyle = .none
         if indexPath.row.isMultiple(of: 2) {
             cell.cellView.backgroundColor = colorForOCell
@@ -83,7 +88,7 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = presenter.model(for: indexPath)
-        let detailVC = ModuleBuilder.shared.detailVC(for: model)
+        let detailVC = Assembly.assembler.detailVC(for: model)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -91,11 +96,9 @@ extension FavoriteViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension FavoriteViewController: FavoriteViewProtocol {
     
-    
     func updateView() {
         tableView.reloadData()
     }
-    
     
     func updateView(withLoader isLoading: Bool) {
         print(isLoading, "true")

@@ -25,11 +25,8 @@ final class ChartService: ChartServiceProtocol {
     }
 }
 
-
 extension ChartServiceProtocol {
     func getCharts(id: String, completion: @escaping (Result<ChartPrices, NetworkError>) -> Void) {
-            getCharts(id: id, currency: "usd", days: "100", isDaily: true, completion: completion)
+        getCharts(id: id, currency: "usd", days: "100", isDaily: true, completion: completion)
     }
 }
-
-

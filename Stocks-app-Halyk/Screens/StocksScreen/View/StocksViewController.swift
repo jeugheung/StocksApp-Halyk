@@ -37,7 +37,6 @@ final class StocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        //setupTabBar()
         setupNavigation()
         setupSubviews()
         presenter.loadView()
@@ -47,20 +46,20 @@ final class StocksViewController: UIViewController {
         view.backgroundColor = .white
     }
     
-    
     private func setupSubviews() {
         view.addSubview(tableView)
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     private func setupNavigation() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.topItem?.title = "Stocks"
     }
-
 }
 
 extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
@@ -69,9 +68,10 @@ extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as! StockCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StockCell.typeName, for: indexPath) as? StockCell else {
+            return UITableViewCell()
+        }
         cell.configure(with: presenter.model(for: indexPath))
-        
         
         if indexPath.row.isMultiple(of: 2) {
             cell.cellView.backgroundColor = colorForOCell
@@ -83,15 +83,15 @@ extension StocksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let model = presenter.model(for: indexPath)
-        let detailVC = ModuleBuilder.shared.detailVC(for: model)
+        let detailVC = Assembly.assembler.detailVC(for: model)
         
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
 extension StocksViewController: StocksViewProtocol {
-    
     func updateView() {
         tableView.reloadData()
     }
@@ -108,10 +108,3 @@ extension StocksViewController: StocksViewProtocol {
         print("Error - ", message)
     }
 }
-
-
-
-
-
-
-

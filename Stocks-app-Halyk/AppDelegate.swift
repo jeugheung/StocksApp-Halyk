@@ -12,14 +12,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var navController = UINavigationController()
+    let appearance = UINavigationBarAppearance()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ModuleBuilder.shared.tabbarController()
+        window?.rootViewController = Assembly.assembler.tabbarController()
         window?.makeKeyAndVisible()
-        return true
         
+        appearance.configureWithOpaqueBackground()
+        appearance.shadowColor = .clear
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        return true
     }
 }
 
