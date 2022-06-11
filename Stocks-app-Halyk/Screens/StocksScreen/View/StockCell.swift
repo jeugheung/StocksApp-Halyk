@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class StockCell: UITableViewCell {
     
@@ -99,6 +100,10 @@ final class StockCell: UITableViewCell {
         starButton.isSelected = model.isFavotite
         favoriteAction = {
             model.setFavorite()
+        }
+        
+        if let url = URL(string: model.iconURL) {
+            iconView.kf.setImage(with: .network(url), placeholder: UIImage(named: "AAPL"))
         }
     }
     

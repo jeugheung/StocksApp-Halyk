@@ -20,7 +20,7 @@ protocol ChartPresentProtocol {
     func favoriteButtonTapped()
 }
 
-class ChartsPresenter: ChartPresentProtocol {
+final class ChartsPresenter: ChartPresentProtocol {
     lazy var titleModel: DetailTitleView.TilteModel = {
         .from(stockModel: model)
     }()

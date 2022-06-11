@@ -35,7 +35,10 @@ final class Assembly {
     }
     
     func searchVC() -> UIViewController {
-        return UIViewController()
+        let presenter = SearchPresenter(service: stocksService)
+        let view = SearchView(presenter: presenter)
+        presenter.view = view
+        return view
     }
     
     
@@ -49,7 +52,7 @@ final class Assembly {
         secondVC.tabBarItem = UITabBarItem(title: "Favorites", image: UIImage(named: "star3.pdf"), tag: 1)
         
         let thirdVC = searchVC()
-        thirdVC.tabBarItem = UITabBarItem(title: "Search", image: nil, tag: 2)
+        thirdVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "searchNav.pdf"), tag: 2)
         
         tabbar.viewControllers = [stocksVC, secondVC, thirdVC].map { UINavigationController (rootViewController: $0)}
         return tabbar

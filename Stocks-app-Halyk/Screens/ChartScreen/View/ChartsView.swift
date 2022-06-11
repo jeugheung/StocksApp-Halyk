@@ -198,7 +198,7 @@ final class ChartsContainerView: UIView {
             yValues.append(dataEntry)
         }
         
-        let lineDataSet = LineChartDataSet(entries: yValues, label: "Weekly Data")
+        let lineDataSet = LineChartDataSet(entries: yValues, label: "Prices Data")
         lineDataSet.fillColor = .lightGray
         lineDataSet.setColor(.black)
         lineDataSet.drawValuesEnabled = false
