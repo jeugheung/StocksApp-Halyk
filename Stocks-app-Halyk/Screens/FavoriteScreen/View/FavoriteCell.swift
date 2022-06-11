@@ -30,7 +30,7 @@ final class FavoriteCell: UITableViewCell {
         return imageView
     }()
     
-    lazy var symbolLabel: UILabel = {
+    private lazy var symbolLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "AAPL"
@@ -38,7 +38,7 @@ final class FavoriteCell: UITableViewCell {
         return label
     }()
     
-    lazy var corporationNameLabel: UILabel = {
+    private lazy var corporationNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Apple Inc."

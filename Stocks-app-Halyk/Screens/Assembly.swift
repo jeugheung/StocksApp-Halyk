@@ -19,7 +19,7 @@ final class Assembly {
     private lazy var stockServiceTwo: ChartServiceProtocol =
         ChartService(client: network)
     
-    func stocksModule() -> UIViewController {
+    private func stocksModule() -> UIViewController {
         let presneter = StocksPresenter(service: stocksService)
         let view = StocksViewController(presenter: presneter)
         presneter.view = view
@@ -27,17 +27,23 @@ final class Assembly {
         return view
     }
     
-    func secondVC() -> UIViewController {
+    private func secondVC() -> UIViewController {
         let presenter = FavoritePresenter(service: stocksService)
         let view = FavoriteViewController(presenter: presenter)
         presenter.view = view
         return view
     }
     
-    func searchVC() -> UIViewController {
+    private func searchVC() -> UIViewController {
         return UIViewController()
     }
     
+    func detailVC(for model: StockModelProtocol) -> UIViewController {
+        let presneter = ChartsPresenter(model: model, service: stockServiceTwo, chartModel: ChartModel(dictiOFPeriod: [:]))
+        let view = ChartViewController(with: presneter)
+        presneter.view = view
+        return view
+    }
     
     func tabbarController() -> UIViewController {
         let tabbar = UITabBarController()
@@ -53,12 +59,5 @@ final class Assembly {
         
         tabbar.viewControllers = [stocksVC, secondVC, thirdVC].map { UINavigationController (rootViewController: $0)}
         return tabbar
-    }
-    
-    func detailVC(for model: StockModelProtocol) -> UIViewController {
-        let presneter = ChartsPresenter(model: model, service: stockServiceTwo, chartModel: ChartModel(dictiOFPeriod: [:]))
-        let view = ChartViewController(with: presneter)
-        presneter.view = view
-        return view
     }
 }

@@ -281,16 +281,8 @@
 			children = (
 				C9EABC8628477D94005FA525 /* Presenter */,
 				C9EABC8528477D8E005FA525 /* View */,
-				C9EABC8428477D84005FA525 /* Model */,
 			);
 			path = FavoriteScreen;
-			sourceTree = "<group>";
-		};
-		C9EABC8428477D84005FA525 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		C9EABC8528477D8E005FA525 /* View */ = {
