@@ -69,12 +69,9 @@ final class SearchView: UIViewController {
         setupNavigation()
         setupSubviews()
         setupConstraints()
-        
-        presenter.searchStocks(searcher: nil)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        print(textField.text!)
         presenter.searchStocks(searcher: textField.text)
     }
     

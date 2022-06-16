@@ -24,7 +24,9 @@ protocol SearchPresenterProtocol {
 }
 
 final class SearchPresenter: SearchPresenterProtocol {
-  
+    
+    var lastSearch: [String] = []
+    
     private let service: StocksServiceProtocol
     var stoks: [StockModelProtocol] = []
     
@@ -47,7 +49,8 @@ final class SearchPresenter: SearchPresenterProtocol {
                 self?.view?.updateView(withLoader: false)
                 switch result {
                 case .success(let stocks):
-                    self?.stoks = stocks.filter({ $0.name == searcher || $0.symbol == searcher })
+                    let search = stocks.filter({ $0.name.lowercased().contains(searcher.lowercased()) || $0.symbol.lowercased().contains(searcher.lowercased()) })
+                    self?.stoks = search
                     self?.view?.updateView()
                 case .failure(let error):
                     self?.view?.updateView(withError: error.localizedDescription)

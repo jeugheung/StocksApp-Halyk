@@ -47,7 +47,6 @@ final class StocksPresenter: StocksPresenterProtocol {
             switch result {
             case .success(let stocks):
                 self?.stoks = stocks
-                print(stocks[2].id)
                 self?.view?.updateView()
             case .failure(let error):
                 self?.view?.updateView(withError: error.localizedDescription)
@@ -64,6 +63,9 @@ extension StocksPresenter: FavoritesUpdateServiceProtocol {
     func setFavorite(notification: Notification) {
         guard let id = notification.stockId, let index = stoks.firstIndex(where: { $0.id == id }) else { return }
         let indexPath = IndexPath(row: index, section: 0)
+        //view?.updateCell(for: indexPath)
+        //view?.updateCell(for: IndexPath(row: index, section: 0))
+       
         view?.updateCell(for: indexPath)
     }
 }

@@ -45,9 +45,7 @@ final class FavoritePresenter: FavoritePresenterProtocol {
             switch result {
             case .success(let stocks):
                 let firstVcStocks = stocks
-                self?.stoks = firstVcStocks.filter({ stock in
-                    stock.isFavotite == true
-                })
+                self?.stoks = firstVcStocks.filter({ $0.isFavotite })
                 self?.view?.updateView()
             case .failure(let error):
                 self?.view?.updateView(withError: error.localizedDescription)
